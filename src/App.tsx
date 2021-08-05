@@ -10,6 +10,8 @@ const App = () => {
     return <div>Loading ...</div>;
   }
 
+  console.log({ user });
+
   return (
     <>
       {isAuthenticated ? <LogoutButton /> : <LoginButton />}
