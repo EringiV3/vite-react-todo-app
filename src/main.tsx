@@ -2,12 +2,8 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createClient, Provider } from 'urql';
 import App from './App';
-
-const client = createClient({
-  url: 'http://localhost:4000/graphql',
-});
+import AuthorizedUrqlProvider from './components/AuthorizedUrqlProvider';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,9 +14,9 @@ ReactDOM.render(
       audience="https://apollo-server-prisma-todo-app.eringiv3.com"
     >
       <ChakraProvider>
-        <Provider value={client}>
+        <AuthorizedUrqlProvider>
           <App />
-        </Provider>
+        </AuthorizedUrqlProvider>
       </ChakraProvider>
     </Auth0Provider>
   </React.StrictMode>,

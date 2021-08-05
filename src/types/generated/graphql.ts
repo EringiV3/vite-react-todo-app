@@ -104,7 +104,7 @@ export type UserInput = {
 export type GetTodosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTodosQuery = { __typename?: 'Query', getTodos: Array<Maybe<{ __typename?: 'Todo', id?: Maybe<number> }>> };
+export type GetTodosQuery = { __typename?: 'Query', getTodos: Array<Maybe<{ __typename?: 'Todo', id?: Maybe<number>, title?: Maybe<string> }>> };
 
 import { IntrospectionQuery } from 'graphql';
 export default {

@@ -1789,12 +1789,20 @@
   dependencies:
     "@types/node" "*"
 
-"@urql/core@^2.1.4":
+"@urql/core@>=2.1.6", "@urql/core@^2.1.4":
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/@urql/core/-/core-2.1.6.tgz#04cafa4e6eaad909f5e90ae48dacfc3f442183e0"
   integrity sha512-wYem2NGdrFMNm9ViJo5FFoq2liU0WIp73hPppkXnVB8+U/fSwnIabTxwUy5/FsQfNVdqn3M2NgWCMU5ai79WJg==
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.0"
+    wonka "^4.0.14"
+
+"@urql/exchange-auth@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-auth/-/exchange-auth-0.1.5.tgz#903ad5c747c9fdc39f89becebfb61a9e639de9bd"
+  integrity sha512-XU0JvmWwizrcxEaSztXetJj0r/8CJO3igJ6k1wN9fqPRosgb6IjuJg0QGtTBrfJzqGx9q8t52k8eK9QkTphTbA==
+  dependencies:
+    "@urql/core" ">=2.1.6"
     wonka "^4.0.14"
 
 "@urql/introspection@0.3.0":

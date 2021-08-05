@@ -1,7 +1,8 @@
-export const getTodo = `
-query GetTodos {
-  getTodos {
-    id
+export const getTodoQuery = /* GraphQL */ `
+  query GetTodos {
+    getTodos {
+      id
+      title
+    }
   }
-}
 `;
