@@ -8,7 +8,7 @@ const LogoutButton = () => {
   return (
     <Button
       colorScheme="blue"
-      onClick={() => logout({ returnTo: window.location.origin })}
+      onClick={() => logout({ returnTo: `${window.location.origin}/login` })}
     >
       Logout
     </Button>
