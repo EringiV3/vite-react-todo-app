@@ -101,10 +101,23 @@ export type UserInput = {
   name: Scalars['String'];
 };
 
+export type CreateUserMutationVariables = Exact<{
+  createUserId: Scalars['String'];
+  createUserInput: UserInput;
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser?: Maybe<{ __typename?: 'User', id?: Maybe<string> }> };
+
 export type GetTodosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetTodosQuery = { __typename?: 'Query', getTodos: Array<Maybe<{ __typename?: 'Todo', id?: Maybe<number>, title?: Maybe<string> }>> };
+
+export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserQuery = { __typename?: 'Query', getUser?: Maybe<{ __typename?: 'User', id?: Maybe<string>, name?: Maybe<string>, todos?: Maybe<Array<Maybe<{ __typename?: 'Todo', id?: Maybe<number>, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title?: Maybe<string>, description?: Maybe<string>, status: TodoStatus }>>> }> };
 
 import { IntrospectionQuery } from 'graphql';
 export default {

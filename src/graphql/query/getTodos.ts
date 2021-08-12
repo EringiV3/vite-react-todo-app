@@ -1,4 +1,4 @@
-export const getTodoQuery = /* GraphQL */ `
+export const getTodosQuery = /* GraphQL */ `
   query GetTodos {
     getTodos {
       id
