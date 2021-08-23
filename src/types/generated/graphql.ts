@@ -101,6 +101,13 @@ export type UserInput = {
   name: Scalars['String'];
 };
 
+export type AddTodoMutationVariables = Exact<{
+  addTodoInput: AddTodoInput;
+}>;
+
+
+export type AddTodoMutation = { __typename?: 'Mutation', addTodo?: Maybe<{ __typename?: 'Todo', id?: Maybe<number>, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title?: Maybe<string>, description?: Maybe<string>, status: TodoStatus, userId?: Maybe<string> }> };
+
 export type CreateUserMutationVariables = Exact<{
   createUserId: Scalars['String'];
   createUserInput: UserInput;
