@@ -10,9 +10,9 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <PrivateRoute exact path="/" component={CallbackScreen} />
         <UnAuthRoute exact path="/login" component={LoginScreen} />
         <PrivateRoute exact path="/todo" component={TodoListScreen} />
-        <PrivateRoute exact path="/" component={CallbackScreen} />
       </Switch>
     </Router>
   );

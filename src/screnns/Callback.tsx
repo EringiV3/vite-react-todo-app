@@ -26,8 +26,9 @@ const CallbackScreen: React.FC = () => {
   console.log({ user, data });
 
   useEffect(() => {
-    if (fetching) return;
     if (!user) return;
+    if (fetching) return;
+
     if (!data?.getUser) {
       createUser({
         createUserId: user.sub as string,
@@ -40,8 +41,11 @@ const CallbackScreen: React.FC = () => {
           history.push('/todo');
         })
         .catch((e) => console.error(e));
+    } else {
+      history.push('/todo');
     }
-  }, [data, fetching]);
+  }, [data, fetching, user]);
+
   return <div>Loading...</div>;
 };
 
