@@ -1,6 +1,7 @@
 import {
   Box,
   Container,
+  Heading,
   Tab,
   TabList,
   TabPanel,
@@ -8,12 +9,43 @@ import {
   Tabs,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useQuery } from 'urql';
 import LogoutButton from '../components/LogoutButton';
 import TodoCreator from '../components/TodoCreator.tsx';
+import { getTodosQuery } from '../graphql/query/getTodos';
+import { getUserQuery } from '../graphql/query/getUser';
+import {
+  GetTodosQuery,
+  GetTodosQueryVariables,
+  GetUserQuery,
+  GetUserQueryVariables,
+} from '../types/generated/graphql';
 
 const TodoListScreen: React.FC = () => {
+  const [getTodosQueryResult] = useQuery<GetTodosQuery, GetTodosQueryVariables>(
+    {
+      query: getTodosQuery,
+    }
+  );
+  const [getUserQueryResult] = useQuery<GetUserQuery, GetUserQueryVariables>({
+    query: getUserQuery,
+  });
+  const doneTodos =
+    getTodosQueryResult.data?.getTodos.filter(
+      (todo) => todo?.status === 'done'
+    ) ?? [];
+  const todos =
+    getTodosQueryResult.data?.getTodos.filter(
+      (todo) => todo?.status === 'pending'
+    ) ?? [];
+
   return (
     <Box position="relative">
+      {getUserQueryResult.data && (
+        <Box position="absolute" top="10px" left="10px">
+          <Heading>{getUserQueryResult.data.getUser?.name} のTodos</Heading>
+        </Box>
+      )}
       <Box position="absolute" top="10px" right="10px">
         <LogoutButton />
       </Box>
@@ -26,10 +58,18 @@ const TodoListScreen: React.FC = () => {
           <TabPanels>
             <TabPanel>
               <TodoCreator />
-              <p>one!</p>
+              <Box>
+                {todos.map((todo) => (
+                  <div key={todo?.id}>{todo?.title}</div>
+                ))}
+              </Box>
             </TabPanel>
             <TabPanel>
-              <p>two!</p>
+              {doneTodos.length === 0 ? (
+                <Box>完了したTodoはありません</Box>
+              ) : (
+                doneTodos.map((todo) => <div key={todo?.id}>{todo?.title}</div>)
+              )}
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -119,7 +119,7 @@ export type CreateUserMutation = { __typename?: 'Mutation', createUser?: Maybe<{
 export type GetTodosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTodosQuery = { __typename?: 'Query', getTodos: Array<Maybe<{ __typename?: 'Todo', id?: Maybe<number>, title?: Maybe<string> }>> };
+export type GetTodosQuery = { __typename?: 'Query', getTodos: Array<Maybe<{ __typename?: 'Todo', id?: Maybe<number>, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title?: Maybe<string>, status: TodoStatus, userId?: Maybe<string> }>> };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
