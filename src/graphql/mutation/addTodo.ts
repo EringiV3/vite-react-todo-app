@@ -7,6 +7,10 @@ export const addTodoMutation = /* GraphQL */ `
       title
       description
       status
+      user {
+        id
+        name
+      }
       userId
     }
   }

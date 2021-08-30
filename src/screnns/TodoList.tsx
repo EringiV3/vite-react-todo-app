@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery } from 'urql';
+import EditableTodo from '../components/EditableTodo';
 import LogoutButton from '../components/LogoutButton';
 import TodoCreator from '../components/TodoCreator.tsx';
 import { getTodosQuery } from '../graphql/query/getTodos';
@@ -60,7 +61,7 @@ const TodoListScreen: React.FC = () => {
               <TodoCreator />
               <Box>
                 {todos.map((todo) => (
-                  <div key={todo?.id}>{todo?.title}</div>
+                  <EditableTodo key={todo.id} todo={todo} />
                 ))}
               </Box>
             </TabPanel>

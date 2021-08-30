@@ -6,6 +6,10 @@ export const getTodosQuery = /* GraphQL */ `
       updatedAt
       title
       status
+      user {
+        id
+        name
+      }
       userId
     }
   }
