@@ -116,6 +116,13 @@ export type CreateUserMutationVariables = Exact<{
 
 export type CreateUserMutation = { __typename?: 'Mutation', createUser?: Maybe<{ __typename?: 'User', id?: Maybe<string> }> };
 
+export type DeleteTodoMutationVariables = Exact<{
+  deleteTodoId: Scalars['Int'];
+}>;
+
+
+export type DeleteTodoMutation = { __typename?: 'Mutation', deleteTodo?: Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, description?: Maybe<string>, status: TodoStatus, userId: string, user: { __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> } }> };
+
 export type UpdateTodoMutationVariables = Exact<{
   updateTodoId: Scalars['Int'];
   updateTodoInput: UpdateTodoInput;

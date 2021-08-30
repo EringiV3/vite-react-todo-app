@@ -1,4 +1,4 @@
-import { CheckIcon } from '@chakra-ui/icons';
+import { CheckIcon, DeleteIcon } from '@chakra-ui/icons';
 import {
   Editable,
   EditableInput,
@@ -9,8 +9,11 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useMutation } from 'urql';
+import { deleteTodoMutation } from '../graphql/mutation/deleteTodo';
 import { updateTodoMutation } from '../graphql/mutation/updateTodo';
 import {
+  DeleteTodoMutation,
+  DeleteTodoMutationVariables,
   Todo,
   UpdateTodoMutation,
   UpdateTodoMutationVariables,
@@ -22,10 +25,17 @@ type Props = {
 };
 const EditableTodo: React.FC<Props> = ({ todo, type }) => {
   const toast = useToast();
-  const [_, updateTodo] = useMutation<
+
+  const [, updateTodo] = useMutation<
     UpdateTodoMutation,
     UpdateTodoMutationVariables
   >(updateTodoMutation);
+
+  const [, deleteTodo] = useMutation<
+    DeleteTodoMutation,
+    DeleteTodoMutationVariables
+  >(deleteTodoMutation);
+
   const [todoTitle, setTodoTitle] = useState(todo.title);
 
   const handleSubmit = async () => {
@@ -49,7 +59,7 @@ const EditableTodo: React.FC<Props> = ({ todo, type }) => {
     setTodoTitle(value);
   };
 
-  const handleClick = async () => {
+  const handleCheck = async () => {
     try {
       await updateTodo({
         updateTodoId: todo.id,
@@ -62,6 +72,20 @@ const EditableTodo: React.FC<Props> = ({ todo, type }) => {
       toast({
         title: 'エラーが発生しました',
         description: 'Todoの更新に失敗しました',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleClickDelete = async () => {
+    try {
+      await deleteTodo({ deleteTodoId: todo.id });
+    } catch (error) {
+      toast({
+        title: 'エラーが発生しました',
+        description: 'Todoの削除に失敗しました',
         status: 'error',
         duration: 9000,
         isClosable: true,
@@ -85,7 +109,7 @@ const EditableTodo: React.FC<Props> = ({ todo, type }) => {
         marginRight="20px"
         position="relative"
         top="2px"
-        onClick={handleClick}
+        onClick={handleCheck}
       />
       <Editable
         textAlign="left"
@@ -100,6 +124,14 @@ const EditableTodo: React.FC<Props> = ({ todo, type }) => {
         <EditablePreview />
         <EditableInput />
       </Editable>
+      {type === 'complete' && (
+        <IconButton
+          size="md"
+          aria-label="delete"
+          icon={<DeleteIcon />}
+          onClick={handleClickDelete}
+        />
+      )}
     </Flex>
   );
 };
