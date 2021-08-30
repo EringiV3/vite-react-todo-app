@@ -22,6 +22,7 @@ const TodoCreator: React.FC = () => {
     if (value === '') return;
     try {
       await addTodo({ addTodoInput: { title: value } });
+      setValue('');
     } catch (error) {
       toast({
         title: 'エラーが発生しました',

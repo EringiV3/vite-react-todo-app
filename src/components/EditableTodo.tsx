@@ -18,8 +18,9 @@ import {
 
 type Props = {
   todo: Todo;
+  type: 'complete' | 'unComplete';
 };
-const EditableTodo: React.FC<Props> = ({ todo }) => {
+const EditableTodo: React.FC<Props> = ({ todo, type }) => {
   const toast = useToast();
   const [_, updateTodo] = useMutation<
     UpdateTodoMutation,
@@ -52,7 +53,10 @@ const EditableTodo: React.FC<Props> = ({ todo }) => {
     try {
       await updateTodo({
         updateTodoId: todo.id,
-        updateTodoInput: { title: todoTitle, status: 'done' },
+        updateTodoInput: {
+          title: todoTitle,
+          status: todo.status === 'pending' ? 'done' : 'pending',
+        },
       });
     } catch (error) {
       toast({
@@ -66,9 +70,14 @@ const EditableTodo: React.FC<Props> = ({ todo }) => {
   };
 
   return (
-    <Flex alignItems="center">
+    <Flex
+      alignItems="center"
+      padding="10px"
+      borderRadius="10px"
+      border="1px solid #d3d3d3"
+    >
       <IconButton
-        // colorScheme="green"
+        colorScheme={type === 'complete' ? 'green' : 'gray'}
         isRound
         size="xs"
         aria-label="done"
@@ -80,11 +89,13 @@ const EditableTodo: React.FC<Props> = ({ todo }) => {
       />
       <Editable
         textAlign="left"
-        fontSize="2xl"
+        fontSize="xl"
         onChange={handleChange}
         value={todoTitle}
         submitOnBlur
         onSubmit={handleSubmit}
+        flex="1"
+        isDisabled={type === 'complete'}
       >
         <EditablePreview />
         <EditableInput />

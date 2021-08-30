@@ -20,6 +20,7 @@ import {
   GetTodosQueryVariables,
   GetUserQuery,
   GetUserQueryVariables,
+  Todo,
 } from '../types/generated/graphql';
 
 const TodoListScreen: React.FC = () => {
@@ -40,6 +41,8 @@ const TodoListScreen: React.FC = () => {
       (todo) => todo?.status === 'pending'
     ) ?? [];
 
+  const sortCallback = (a: Todo, b: Todo) => a.id - b.id;
+
   return (
     <Box position="relative">
       {getUserQueryResult.data && (
@@ -59,9 +62,11 @@ const TodoListScreen: React.FC = () => {
           <TabPanels>
             <TabPanel>
               <TodoCreator />
-              <Box>
-                {todos.map((todo) => (
-                  <EditableTodo key={todo.id} todo={todo} />
+              <Box paddingTop="10px">
+                {todos.sort(sortCallback).map((todo) => (
+                  <Box key={todo.id} marginTop="15px">
+                    <EditableTodo todo={todo} type="unComplete" />
+                  </Box>
                 ))}
               </Box>
             </TabPanel>
@@ -69,7 +74,11 @@ const TodoListScreen: React.FC = () => {
               {doneTodos.length === 0 ? (
                 <Box>完了したTodoはありません</Box>
               ) : (
-                doneTodos.map((todo) => <div key={todo?.id}>{todo?.title}</div>)
+                doneTodos.sort(sortCallback).map((todo) => (
+                  <Box key={todo.id} marginTop="15px">
+                    <EditableTodo todo={todo} type="complete" />
+                  </Box>
+                ))
               )}
             </TabPanel>
           </TabPanels>
