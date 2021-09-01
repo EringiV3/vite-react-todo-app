@@ -4,14 +4,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import AuthorizedUrqlProvider from './components/AuthorizedUrqlProvider';
+import {
+  AUTH0_AUDIENCE,
+  AUTH0_CLIENT_ID,
+  AUTH0_DOMAIN,
+  AUTH0_REDIRECT_URI,
+} from './config/constants';
 
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
-      domain="apollo-server-prisma-todo-app.jp.auth0.com"
-      clientId="aUD1RQ95pCRmKGITpCxnpcyk8wZFknjk"
-      redirectUri="http://localhost:3000"
-      audience="https://apollo-server-prisma-todo-app.eringiv3.com"
+      domain={AUTH0_DOMAIN}
+      clientId={AUTH0_CLIENT_ID}
+      redirectUri={AUTH0_REDIRECT_URI}
+      audience={AUTH0_AUDIENCE}
     >
       <ChakraProvider>
         <AuthorizedUrqlProvider>

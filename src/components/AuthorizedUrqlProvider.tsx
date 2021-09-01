@@ -10,6 +10,7 @@ import {
   Provider,
 } from 'urql';
 import { fromPromise, fromValue, map, mergeMap, pipe } from 'wonka';
+import { API_HOST } from '../config/constants';
 
 const AuthorizedUrqlProvider: React.FC = ({ children }) => {
   const { getAccessTokenSilently } = useAuth0();
@@ -37,7 +38,7 @@ const AuthorizedUrqlProvider: React.FC = ({ children }) => {
     };
 
   const client = createClient({
-    url: 'http://localhost:4000/graphql',
+    url: API_HOST,
     exchanges: [
       dedupExchange,
       cacheExchange,
