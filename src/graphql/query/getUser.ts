@@ -8,7 +8,6 @@ export const getUserQuery = /* GraphQL */ `
         createdAt
         updatedAt
         title
-        description
         status
       }
     }

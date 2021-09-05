@@ -15,7 +15,6 @@ export type Scalars = {
 
 export type AddTodoInput = {
   title: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
 };
 
 
@@ -74,9 +73,8 @@ export type Todo = {
   createdAt?: Maybe<Scalars['Date']>;
   updatedAt?: Maybe<Scalars['Date']>;
   title: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
   status: TodoStatus;
-  user: User;
+  user?: Maybe<User>;
   userId: Scalars['String'];
 };
 
@@ -86,7 +84,6 @@ export type TodoStatus =
 
 export type UpdateTodoInput = {
   title: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
   status: TodoStatus;
 };
 
@@ -106,7 +103,7 @@ export type AddTodoMutationVariables = Exact<{
 }>;
 
 
-export type AddTodoMutation = { __typename?: 'Mutation', addTodo?: Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, description?: Maybe<string>, status: TodoStatus, userId: string, user: { __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> } }> };
+export type AddTodoMutation = { __typename?: 'Mutation', addTodo?: Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, status: TodoStatus, userId: string, user?: Maybe<{ __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> }> }> };
 
 export type CreateUserMutationVariables = Exact<{
   createUserId: Scalars['String'];
@@ -121,7 +118,7 @@ export type DeleteTodoMutationVariables = Exact<{
 }>;
 
 
-export type DeleteTodoMutation = { __typename?: 'Mutation', deleteTodo?: Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, description?: Maybe<string>, status: TodoStatus, userId: string, user: { __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> } }> };
+export type DeleteTodoMutation = { __typename?: 'Mutation', deleteTodo?: Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, status: TodoStatus, userId: string, user?: Maybe<{ __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> }> }> };
 
 export type UpdateTodoMutationVariables = Exact<{
   updateTodoId: Scalars['Int'];
@@ -129,17 +126,17 @@ export type UpdateTodoMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTodoMutation = { __typename?: 'Mutation', updateTodo?: Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, description?: Maybe<string>, status: TodoStatus, userId: string, user: { __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> } }> };
+export type UpdateTodoMutation = { __typename?: 'Mutation', updateTodo?: Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, status: TodoStatus, userId: string, user?: Maybe<{ __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> }> }> };
 
 export type GetTodosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTodosQuery = { __typename?: 'Query', getTodos: Array<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, status: TodoStatus, userId: string, user: { __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> } }> };
+export type GetTodosQuery = { __typename?: 'Query', getTodos: Array<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, status: TodoStatus, userId: string, user?: Maybe<{ __typename?: 'User', id?: Maybe<string>, name?: Maybe<string> }> }> };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', getUser?: Maybe<{ __typename?: 'User', id?: Maybe<string>, name?: Maybe<string>, todos?: Maybe<Array<Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, description?: Maybe<string>, status: TodoStatus }>>> }> };
+export type GetUserQuery = { __typename?: 'Query', getUser?: Maybe<{ __typename?: 'User', id?: Maybe<string>, name?: Maybe<string>, todos?: Maybe<Array<Maybe<{ __typename?: 'Todo', id: number, createdAt?: Maybe<any>, updatedAt?: Maybe<any>, title: string, status: TodoStatus }>>> }> };
 
 import { IntrospectionQuery } from 'graphql';
 export default {
@@ -386,14 +383,6 @@ export default {
             "args": []
           },
           {
-            "name": "description",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Any"
-            },
-            "args": []
-          },
-          {
             "name": "status",
             "type": {
               "kind": "NON_NULL",
@@ -407,12 +396,9 @@ export default {
           {
             "name": "user",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
             },
             "args": []
           },

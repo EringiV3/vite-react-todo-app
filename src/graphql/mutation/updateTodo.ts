@@ -5,7 +5,6 @@ export const updateTodoMutation = /* GraphQL */ `
       createdAt
       updatedAt
       title
-      description
       status
       user {
         id
